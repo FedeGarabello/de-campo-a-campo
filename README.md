@@ -39,6 +39,8 @@ Follow these steps to set up and run the project, feel free to use the Makefile 
     http://localhost:3000/index.html
     ```
 
+Also, the api documentation is available at: https://documenter.getpostman.com/view/7945247/2sAYJ4hLUV
+
 ---
 
 ## 📌 Available Endpoints
