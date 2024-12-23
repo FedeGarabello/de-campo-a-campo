@@ -40,22 +40,24 @@
             const description = document.getElementById('description').value.trim();
             const price = parseFloat(document.getElementById('price').value);
 
-            // if (!name || !description || isNaN(price) || price <= 0) {
-            //     alert('Por favor, completa todos los campos correctamente.');
-            //     return;
-            // }
+            if (!name || !description || isNaN(price) || price <= 0) {
+                alert('Por favor, completa todos los campos correctamente.');
+                return;
+            }
 
             const producto = { name, description, price };
 
             apiFetch('/products', 'POST', producto)
                 .then(() => {
                     showMessage('Producto agregado exitosamente.', 'success');
-                    window.location.href = '../index.html';
+                    setTimeout(() => {
+                        window.location.href = '../index.html';
+                    }, 2000);
                 })
-                // .catch((error) => {
-                //     console.error(error);
-                //     alert('Error al agregar el producto.');
-                // });
+                .catch((error) => {
+                    console.error(error);
+                    alert('Error al agregar el producto.');
+                });
         });
     </script>
 </body>

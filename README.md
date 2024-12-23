@@ -31,6 +31,14 @@ Follow these steps to set up and run the project, feel free to use the Makefile 
     ```bash
     docker compose down -v
     or make down
+    ```
+
+5. **The aplication will be aviable at:**
+
+    ```bash
+    http://localhost:3000/index.html
+    ```
+
 ---
 
 ## 📌 Available Endpoints
