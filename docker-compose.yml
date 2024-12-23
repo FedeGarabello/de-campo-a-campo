@@ -1,0 +1,46 @@
+services:
+  php:
+    build:
+      context: ./backend
+    container_name: de_campo_challenge_php
+    environment:
+      USD_VALUE: "1000.00"
+    ports:
+      - "8080:80"
+    volumes:
+      - ./backend:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: de_campo_challenge_db
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: productos_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    volumes:
+      - ./backend/scripts/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: de_campo_challenge_frontend
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    depends_on:
+      - php 
+    environment:
+      API_URL: "http://php:80"
+
+volumes:
+  db_data:
